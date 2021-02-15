@@ -1,5 +1,5 @@
 
-import React, { useState,useEffect } from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button'
 import Textfield from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
@@ -12,15 +12,12 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography'
 import store from './redux/store';
 import * as actions from './redux/actiontypes'
-import { Provider,useSelector } from 'react-redux';
+import {useSelector } from 'react-redux';
 
 
 function App() {
- // const unsubscribe=store.subscribe(()=>{
-  //  console.log('store changed',store.getState());
- // })
 
-  const [item,setItem]=useState([])
+
   const [todo,SetTodo]=useState()
   const [update,setUpdate]=useState()
   const [open, setOpen] = React.useState(false);
@@ -38,7 +35,6 @@ function App() {
 
 
   const handleClickOpen = (e) => {
-    console.log(e.id)
     setUpdateId(e.id)
     setOpen(true);
     
@@ -63,15 +59,23 @@ function App() {
   }
   
   const AddTodo=()=>{
-    store.dispatch({
-      type:actions.ADD_TODO,
-      payload:{
-        agenda:todo
-      }
-    })
+    if(todo == null || todo==''){
+      console.log(todo)
+      return 
+     
+    }else{
+      console.log(todo)
+      store.dispatch({
+        type:actions.ADD_TODO,
+        payload:{
+          agenda:todo
+        }
+      })
+
+    }
+
   }
   const DeleteTodo=(e)=>{
-    console.log(e.id)
     store.dispatch({
       type:actions.REMOVE_TODO,
       payload:{
@@ -80,16 +84,22 @@ function App() {
     })
   }
   const UpdateTodo=(e)=>{
+    if(update== null || update ==''){
+      console.log(update)
+      return
+    }else{
+      console.log(update)
+      store.dispatch({
+        type:actions.UPDATE_TODO,
+        payload:{
+          id:updateid,
+          agenda:update
+        }
+      })
+      handleClose()
+    }
 
-    console.log(updateid)
-    store.dispatch({
-      type:actions.UPDATE_TODO,
-      payload:{
-        id:updateid,
-        agenda:update
-      }
-    })
-    handleClose()
+ 
   }
 
 
