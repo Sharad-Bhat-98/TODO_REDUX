@@ -60,11 +60,11 @@ function App() {
   
   const AddTodo=()=>{
     if(todo == null || todo==''){
-      console.log(todo)
+      
       return 
      
     }else{
-      console.log(todo)
+    
       store.dispatch({
         type:actions.ADD_TODO,
         payload:{
@@ -85,10 +85,9 @@ function App() {
   }
   const UpdateTodo=(e)=>{
     if(update== null || update ==''){
-      console.log(update)
+  
       return
     }else{
-      console.log(update)
       store.dispatch({
         type:actions.UPDATE_TODO,
         payload:{
@@ -98,12 +97,7 @@ function App() {
       })
       handleClose()
     }
-
- 
   }
-
-
-  
 
  const data=useSelector((state)=> state)
 
