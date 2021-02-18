@@ -19,7 +19,6 @@ const reducer=(state=[],action)=>{
             return state.map(bug => bug.id !== action.payload.id ? bug : {...bug, agenda:action.payload.agenda})
         default:
             return state
-
     }
 
 }
